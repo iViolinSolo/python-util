@@ -11,8 +11,8 @@ import time
 # test seconds process time (wall time or CPU time) meets
 # ======
 def test_time_meets(seconds):
-    def deco(func):
-        def _deco(*args, **kwargs):
+    def wrapper(func):
+        def _wrapper(*args, **kwargs):
             start = time.clock()
             func(*args, **kwargs)
             end = time.clock()
@@ -21,27 +21,26 @@ def test_time_meets(seconds):
             else:
                 print('good!')
 
-        return _deco
+        return _wrapper
 
-    return deco
+    return wrapper
 
 
 # ======
 # print fn running seconds process time (wall time or CPU time)
 # ======
-def test_time_costs():
-    def deco(func):
-        # print(func.__name__)
-        def _deco(*args, **kwargs):
-            start = time.clock()
-            func(*args, **kwargs)
-            end = time.clock()
+def test_time_costs(func):
+    # print(func.__name__)
+    def _wrapper(*args, **kwargs):
+        start = time.clock()
+        fn_res = func(*args, **kwargs)
+        end = time.clock()
 
-            print(f'fn:"{func.__name__}" costs {end - start} seconds')
+        print(f'fn:"{func.__name__}" costs {end - start} seconds')
+        return fn_res
 
-        return _deco
+    return _wrapper
 
-    return deco
 
 
 
@@ -59,9 +58,12 @@ if __name__ == '__main__':
 
     # ========
     # test time costs
-    @test_time_costs()
+    @test_time_costs
     def myfunc2(*args, **kwargs):
+        x = 0
         for i in range(100000):
-            pass
+            x += i
+        return x
 
-    myfunc2()
+    m = myfunc2()
+    print(m)
