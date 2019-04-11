@@ -2,27 +2,30 @@
 # -*- coding: utf-8 -*-
 # Author: violinsolo
 # Created on 2019/4/11
+import os
 
 # 需要将那些包导入
-packages = ["smart", "smart.engine"]
+packages = ['sci-util', ]
 
 # 导入静态文件
 file_data = [
-    ("smart/static", ["smart/static/icon.svg", "smart/static/config.json"]),
+    # ("sci-util/static", ["sci-util/static/icon.svg", "sci-util/static/config.json"]),
 ]
 
 # 第三方依赖
 requires = [
-    "pandas>=0.23.4"
+    'pandas>=0.23.4',
+    'numpy'
 ]
 
+here = os.path.dirname(os.path.realpath(__file__))
 # 自动读取version信息
 about = {}
-with open(os.path.join(here, 'smart', '__version__.py'), 'r', 'utf-8') as f:
+with open(os.path.join(here, 'sci-util', '__version__.py'), 'r', encoding='utf-8') as f:
     exec(f.read(), about)
 
 # 自动读取readme
-with open('README.rst', 'r', 'utf-8') as f:
+with open('README.rst', 'r', encoding='utf-8') as f:
     readme = f.read()
 
 setup(
