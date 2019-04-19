@@ -45,7 +45,7 @@ def n_split(tar_list, n):
 
     The targetlist can be split into slices with a NAX size of 'cnt_per_slice' ...
     :param tar_list: target list to split
-    :param cnt_per_slice: slice per max size...
+    :param n: slice counts ...
     :return: yield one result.
     """
     slice_len = int(len(tar_list) / n)
@@ -58,6 +58,40 @@ def n_split(tar_list, n):
         yield tar_list[cur_idx: cur_idx+(slice_len_1 if i < slice_remain else slice_len)]
         cur_idx += slice_len_1 if i < slice_remain else slice_len
 
+
+def n_split_idx(tar_list_len, n):
+    """
+    Yield successive n-sized(cnt_per_slice) chunks from l(tar_list).
+
+        >>> x = list(range(33))
+        >>> n_split_idx(len(x), 3)
+        <<< [11, 11, 11]
+        >>> n_split_idx(len(x), 4)
+        <<< [9, 8, 8, 8]
+        >>> n_split_idx(len(x), 5)
+        <<< [7, 7, 7, 6, 6]
+        >>> n_split_idx(len(x), 6)
+        <<< [6, 6, 6, 5, 5, 5]
+        >>> n_split_idx(len(x), 7)
+        <<< [5, 5, 5, 5, 5, 4, 4]
+
+    The targetlist can be split into slices with a NAX size of 'cnt_per_slice' ...
+    :param tar_list_len: target list length to split
+    :param n: slice counts ...
+    :return: list of each slice length.
+    """
+
+    slice_len = int(tar_list_len / n)
+    slice_remain = int(tar_list_len % n)
+
+    res = []
+    for i in range(n):
+        if i<slice_remain:
+            res.append(slice_len+1)
+        else:
+            res.append(slice_len)
+
+    return res
 
 
 
