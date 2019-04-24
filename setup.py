@@ -157,8 +157,10 @@ setup(
 # # --wheel-dir: 为打包存储的路径
 # # 空格后为需要打包的工程路径
 # pip3 wheel --wheel-dir=D:\\work\\base_package\\dist D:\\work\\base_package
+# pip3 wheel --wheel-dir=./dist/ .
 
 # # 注册包
 # twine register dist/smart.whl
 # # 上传包
 # twine upload dist/*
+# twine upload dist/sci_util-1.2.0-py3-none-any.whl
