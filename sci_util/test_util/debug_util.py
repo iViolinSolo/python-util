@@ -13,9 +13,9 @@ import time
 def test_time_meets(seconds):
     def wrapper(func):
         def _wrapper(*args, **kwargs):
-            start = time.clock()
+            start = time.process_time()
             func(*args, **kwargs)
-            end = time.clock()
+            end = time.process_time()
             if end - start > seconds:
                 print('bad!')
             else:
@@ -32,11 +32,11 @@ def test_time_meets(seconds):
 def test_time_costs(func):
     # print(func.__name__)
     def _wrapper(*args, **kwargs):
-        start = time.clock()
+        start = time.process_time()
         fn_res = func(*args, **kwargs)
-        end = time.clock()
+        end = time.process_time()
 
-        print(f'fn:"{func.__name__}" costs {end - start} seconds')
+        print(f'fn:"{func.__name__}" costs {round(end - start, 5)} seconds')
         return fn_res
 
     return _wrapper

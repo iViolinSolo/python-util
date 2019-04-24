@@ -149,3 +149,16 @@ setup(
     # zip_safe=False,  # 此项需要，否则卸载时报windows error
 
 )
+
+# # 可以先验证setup.py的正确性
+# python3 setup.py check
+# # 如果没有问题，就可以使用下方的命令正式打包
+# python3 setup.py sdist
+# # --wheel-dir: 为打包存储的路径
+# # 空格后为需要打包的工程路径
+# pip3 wheel --wheel-dir=D:\\work\\base_package\\dist D:\\work\\base_package
+
+# # 注册包
+# twine register dist/smart.whl
+# # 上传包
+# twine upload dist/*
