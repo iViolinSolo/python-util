@@ -33,4 +33,5 @@ def filter_string(target: str) -> str:
 
 
 if __name__ == '__main__':
-    filter_string('')
+    res = filter_string('')
+    print(f'"{res}"')
