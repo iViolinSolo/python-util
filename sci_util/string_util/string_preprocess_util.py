@@ -16,15 +16,23 @@ FILTER_TOKENS = {
 }
 
 
-def filter_string(target: str) -> str:
+def filter_string(target: str, to_removed_tokens: list=None) -> str:
     """
     do filtering for target string
+    :param to_removed_tokens:
+        list of str, that need to filtered from :param target,
+        default is FILTER_TOKENS
     :param target:
+        target string ...
     :return:
+        filtered :param target.
     """
     result = target
 
-    for key, value in FILTER_TOKENS.items():
+    if to_removed_tokens is None:
+        to_removed_tokens = FILTER_TOKENS
+
+    for key, value in to_removed_tokens.items():
         result = result.replace(key, value)
 
     return result
