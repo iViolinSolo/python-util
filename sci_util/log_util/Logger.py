@@ -37,6 +37,21 @@ class Logger(object):
         self.logger.addHandler(sh)  # 把对象加到logger里
         self.logger.addHandler(th)
 
+    def d(self, msg: str):
+        self.logger.debug(msg)
+
+    def i(self, msg: str):
+        self.logger.info(msg)
+
+    def w(self, msg: str):
+        self.logger.warning(msg)
+
+    def e(self, msg: str):
+        self.logger.error(msg)
+
+    def c(self, msg: str):
+        self.logger.critical(msg)
+
 
 if __name__ == '__main__':
     log = Logger('all.log', level='debug')
@@ -45,4 +60,8 @@ if __name__ == '__main__':
     log.logger.warning('警告')
     log.logger.error('报错')
     log.logger.critical('严重')
-    Logger('error.log', level='error').logger.error('error')
+    log.d("debug...2")
+    log2 = Logger('error.log', level='error')
+    log2.e('error')
+    log2.e('error2')
+    log2.d('debug2')
