@@ -4,8 +4,7 @@
 # Created on 2019/4/11
 
 # Types
-# like ...
-# from .interval import Interval
+from .log_util.Logger import Logger
 
 # Constants
 # like ...
@@ -19,4 +18,5 @@
 # )
 
 # Shortcuts
+from .string_util.string_preprocess_util import filter_string
 from .test_util.debug_util import test_time_costs
