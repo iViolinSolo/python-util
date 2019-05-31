@@ -18,7 +18,8 @@ FILTER_TOKENS = {
 
 def filter_string(target: str, to_removed_tokens: list=None) -> str:
     """
-    do filtering for target string
+    element-wise doing filter, do filtering for target string
+
     :param to_removed_tokens:
         list of str, that need to filtered from :param target,
         default is FILTER_TOKENS
@@ -41,5 +42,5 @@ def filter_string(target: str, to_removed_tokens: list=None) -> str:
 
 
 if __name__ == '__main__':
-    res = filter_string('')
+    res = filter_string(' \n 222 \t')
     print(f'"{res}"')
