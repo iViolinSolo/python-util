@@ -6,7 +6,7 @@
 # All fn utils for mapping ...
 
 import numpy as np
-# import pandas as pd
+import pandas as pd
 import json
 
 
@@ -24,7 +24,7 @@ def fn_map_ndarray_to_json_faster(x):
 
 
 def fn_map_json_to_ndarray(x):
-    if np.isnan(x):
+    if pd.isnull(x):
         return x
     else:
         return np.asarray(json.loads(x))
