@@ -24,4 +24,11 @@ def fn_map_ndarray_to_json_faster(x):
 
 
 def fn_map_json_to_ndarray(x):
+    if np.isnan(x):
+        return x
+    else:
+        return np.asarray(json.loads(x))
+
+
+def fn_map_json_to_ndarray_faster(x):
     return np.asarray(json.loads(x))
