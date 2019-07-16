@@ -36,7 +36,7 @@ def test_time_costs(func):
         fn_res = func(*args, **kwargs)
         end = time.process_time()
 
-        print(f'fn:"{func.__name__}" costs {round(end - start, 5)} seconds')
+        print(f'[Info] fn:"{func.__name__}" costs {round(end - start, 5)} seconds')
         return fn_res
 
     return _wrapper
