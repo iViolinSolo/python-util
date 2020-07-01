@@ -39,8 +39,6 @@ def filter_string(target: str, to_removed_tokens: list=None) -> str:
     return result
 
 
-
-
 if __name__ == '__main__':
     res = filter_string(' \n 222 \t')
     print(f'"{res}"')
