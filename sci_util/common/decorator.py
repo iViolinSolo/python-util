@@ -20,7 +20,7 @@ def fn_temporary_not_use(func):
 if __name__ == '__main__':
 
     @fn_temporary_not_use
-    def fn_no_use(a, b):
+    def _fn_no_use(a, b):
         return a+b
 
-    print(fn_no_use(1, 3))
+    print(_fn_no_use(1, 3))
