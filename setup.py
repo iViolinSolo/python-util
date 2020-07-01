@@ -161,6 +161,9 @@ setup(
 
 # # 注册包
 # twine register dist/smart.whl
-# # 上传包
+# # 上传包  enter your pypi account with password
 # twine upload dist/*
 # twine upload dist/sci_util-1.2.0-py3-none-any.whl
+
+# 最新的做法就是直接upload
+# python3 setup.py upload
