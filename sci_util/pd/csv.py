@@ -29,14 +29,14 @@ def combine_csv_files(from_files: list, to_file: str, wanted_cols: Union[list, s
         raise ValueError('from_files cannot be None')
     elif type(from_files) is not list:
         raise ValueError('from_files must be <type: list>')
-    elif len(from_files):
+    elif len(from_files) == 0:
         raise ValueError('from_files cannot be empty')
 
     if to_file is None:
         raise ValueError('to_file cannot be None')
     elif type(to_file) is not str:
         raise ValueError('to_file must be <type: str>')
-    elif len(to_file):
+    elif len(to_file) == 0:
         raise ValueError('to_file cannot be empty')
 
     dfs = []
@@ -54,7 +54,7 @@ def combine_csv_files(from_files: list, to_file: str, wanted_cols: Union[list, s
     # combine all dfs with concat 'outer' join,
     # ignore_index will allow concat directly and add columns automatically,
     # axis=0 means concat follow vertical direction.
-    final_combined_df = pd.concat(dfs, axis=0, ignore_index=True)
+    final_combined_df = pd.concat(dfs, axis=0, ignore_index=True, sort=False)
 
     if wanted_cols is None \
             or (type(wanted_cols) is list and len(wanted_cols) == 0) \
@@ -67,12 +67,12 @@ def combine_csv_files(from_files: list, to_file: str, wanted_cols: Union[list, s
                 if _col not in current_cols:
                     final_combined_df[_col] = np.nan
         elif type(wanted_cols) is str:
-            if current_cols not in current_cols:
-                final_combined_df[current_cols] = np.nan
+            if wanted_cols not in current_cols:
+                final_combined_df[wanted_cols] = np.nan
 
         final_combined_df = final_combined_df[wanted_cols]
 
-    final_combined_df.to_csv(to_file)
+    final_combined_df.to_csv(to_file, header=True)
     return final_combined_df
 
 
@@ -83,13 +83,22 @@ if __name__ == '__main__':
     df1 = pd.DataFrame(d1)
     df2 = pd.DataFrame(d2)
 
-    df1.to_csv('df1_test.csv')
-    df2.to_csv('df2_test.csv')
+    df1_pth = 'df1_test.csv'
+    df2_pth = 'df2_test.csv'
 
-    dfNone = combine_csv_files([df1, df2], 'dfcombine_test_None.csv', None)
-    dfAZC = combine_csv_files([df1, df2], 'dfcombine_test_AZC.csv', ['A', 'Z', 'C'])
+    df1.to_csv(df1_pth, index=False)
+    df2.to_csv(df2_pth, index=False)
 
-    print('df1 === ', df1)
-    print('df2 === ', df2)
-    print('dfNone === ', dfNone)
-    print('dfAZC === ', dfAZC)
+    # dfNone = combine_csv_files(from_files=[df1_pth, df2_pth], to_file='dfcombine_test_None.csv', wanted_cols=None)
+    # dfAZC = combine_csv_files(from_files=[df1_pth, df2_pth], to_file='dfcombine_test_AZC.csv', wanted_cols=['A', 'Z', 'C'])
+    dfNone = combine_csv_files([df1_pth, df2_pth], 'dfcombine_test_None.csv', None)
+    dfAZC = combine_csv_files([df1_pth, df2_pth], 'dfcombine_test_AZC.csv', ['A', 'Z', 'C'])
+    dfZ = combine_csv_files([df1_pth, df2_pth], 'dfcombine_test_Z.csv', 'Z')
+    dfZZZ = combine_csv_files([df1_pth, df2_pth], 'dfcombine_test_ZZZ.csv', 'ZZZ')
+
+    print('df1 === \n', df1)
+    print('df2 === \n', df2)
+    print('dfNone === \n', dfNone)
+    print('dfAZC === \n', dfAZC)
+    print('dfZ === \n', dfZ)
+    print('dfZZZ === \n', dfZZZ)
